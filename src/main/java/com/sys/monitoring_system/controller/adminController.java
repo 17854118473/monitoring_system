@@ -2,7 +2,7 @@ package com.sys.monitoring_system.controller;
 
 import com.sys.monitoring_system.entity.Administrator;
 import com.sys.monitoring_system.mapper.AdministratorMapper;
-import com.sys.monitoring_system.service.userService;
+import com.sys.monitoring_system.service.adminService;
 import com.sys.monitoring_system.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.Map;
 @CrossOrigin
 public class adminController {
     @Autowired
-    private userService userService;
+    private adminService adminService;
 
     @Autowired
     private AdministratorMapper administratorMapper;
@@ -29,18 +29,18 @@ public class adminController {
      * */
     @GetMapping("/findAll")
     public Response findAll(){
-        return Response.success(userService.findAll());
+        return Response.success(adminService.findAll());
     }
 
     /*分页查询普通管理员的信息*/
     @PostMapping("/query")
     public Response query(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize){
-        return Response.success(userService.findByPage(page*pageSize, pageSize));
+        return Response.success(adminService.findByPage(page*pageSize, pageSize));
     }
 
     @GetMapping("deleteById")
     public Response deleteById(@RequestParam("id") String id){
-        int result = userService.deleteById(Integer.parseInt(id));
+        int result = adminService.deleteById(Integer.parseInt(id));
         if(result == 1){
             Map<String, Object> map = new HashMap<>();
             map.put("status", 200);
@@ -72,7 +72,7 @@ public class adminController {
             Administrator administrator = new Administrator();
             administrator.setUsername(username);
             administrator.setPwd(pwd);
-            administrator.setCategory(0);
+            administrator.setCategory(1);
             administrator.setTel(tel);
             administrator.setEmail("5151");
             if(administratorMapper.insert(administrator) == 1){

@@ -1,18 +1,15 @@
 package com.sys.monitoring_system.entity;
 
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class User {
+public class loginVo {
     private String username;
     private String password;
 
-    public User() {
-    }
-
-    public User(String username, String password) {
+    public loginVo(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public loginVo() {
     }
 
     public String getUsername() {
@@ -31,4 +28,3 @@ public class User {
         this.password = password;
     }
 }
-

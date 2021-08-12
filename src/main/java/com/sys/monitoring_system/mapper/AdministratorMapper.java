@@ -1,10 +1,12 @@
 package com.sys.monitoring_system.mapper;
 
 import com.sys.monitoring_system.entity.Administrator;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 import java.util.List;
 
+@Mapper
 public interface AdministratorMapper {
     List<Administrator> findByPage(int offset, int pageSize);
 

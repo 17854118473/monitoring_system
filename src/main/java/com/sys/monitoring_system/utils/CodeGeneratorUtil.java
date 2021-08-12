@@ -66,7 +66,7 @@ public class CodeGeneratorUtil {
         // dsc.setSchemaName("public");
         dsc.setDriverName(CodeGeneratorUtil.DB_DRIVER_NAME);
         dsc.setUsername("root");
-        dsc.setPassword("test");
+        dsc.setPassword("root");
         mpg.setDataSource(dsc);
 
         // 包配置

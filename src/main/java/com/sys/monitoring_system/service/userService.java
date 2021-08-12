@@ -1,16 +1,19 @@
 package com.sys.monitoring_system.service;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.sys.monitoring_system.entity.user;
+import com.sys.monitoring_system.utils.Response;
 
+import java.util.List;
 import java.util.Map;
 
 public interface userService {
-    public Map<String, Object> findAll();
+    Map<String, Object> findByPage(int offset, int pageSize);
 
-    // 分页查询
-    public Map<String, Object> findByPage(int offset, int pageSize);
+    public Response update(String id,String username,String pwd,String tel,String email,String wechat);
 
-    public int deleteById(int id);
+    public Response delete(String id);
+
+    public Response selectByUsername(String username);
 
 }
