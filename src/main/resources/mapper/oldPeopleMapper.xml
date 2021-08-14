@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.monitoring_system.mapper.oldPeopleMapper">
+  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.oldPeople">
+    <id column="oldId" jdbcType="INTEGER" property="oldid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="height" jdbcType="REAL" property="height" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="BMI" jdbcType="REAL" property="bmi" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="urgenttel" jdbcType="VARCHAR" property="urgenttel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oldId, userId, name, sex, height, weight, age, BMI, tel, urgenttel, address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from old_data
+    where oldId = #{oldid,jdbcType=INTEGER}
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+        select count(*) from old_data where userId = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="queryByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from old_data
+    where userId = #{userId,jdbcType=INTEGER} limit #{offset}, #{pageSize}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from old_data
+    where oldId = #{oldid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sys.monitoring_system.entity.oldPeople">
+    insert into old_data (oldId, userId, name, 
+      sex, height, weight, age, 
+      BMI, tel, urgenttel, address
+      )
+    values (#{oldid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{height,jdbcType=REAL}, #{weight,jdbcType=REAL}, #{age,jdbcType=INTEGER}, 
+      #{bmi,jdbcType=REAL}, #{tel,jdbcType=VARCHAR}, #{urgenttel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.oldPeople">
+    insert into old_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oldid != null">
+        oldId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="bmi != null">
+        BMI,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="urgenttel != null">
+        urgenttel,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oldid != null">
+        #{oldid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="bmi != null">
+        #{bmi,jdbcType=REAL},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="urgenttel != null">
+        #{urgenttel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.oldPeople">
+    update old_data
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="bmi != null">
+        BMI = #{bmi,jdbcType=REAL},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="urgenttel != null">
+        urgenttel = #{urgenttel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oldId = #{oldid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.oldPeople">
+    update old_data
+    set userId = #{userid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      height = #{height,jdbcType=REAL},
+      weight = #{weight,jdbcType=REAL},
+      age = #{age,jdbcType=INTEGER},
+      BMI = #{bmi,jdbcType=REAL},
+      tel = #{tel,jdbcType=VARCHAR},
+      urgenttel = #{urgenttel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where oldId = #{oldid,jdbcType=INTEGER}
+  </update>
+</mapper>

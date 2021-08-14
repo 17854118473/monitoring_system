@@ -3,14 +3,9 @@ package com.sys.monitoring_system.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @ClassName: RedisService
- * @Version: 0.0.1
- */
 @Service
 public class RedisService {
 
@@ -114,13 +109,9 @@ public class RedisService {
     //*************String相关数据类型***************************
     /**
      * 设置指定 key 的值
-     * @Author:      小霍
-     * @UpdateUser:
-     * @Version:     0.0.1
      * @param key
      * @param value
-     * @return       void
-     * @throws
+
      */
     public void set(String key, Object value) {
         if(null==key||null==value){

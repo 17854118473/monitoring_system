@@ -22,6 +22,8 @@ public interface AdministratorMapper {
 
     Administrator selectByUsername(String username);
 
+    Administrator selectSuperAdminByName(String username);
+
     int updateByPrimaryKeySelective(Administrator record);
 
     int updateByPrimaryKey(Administrator record);

@@ -1,18 +1,32 @@
 package com.sys.monitoring_system.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class User {
+@Data
+public class LoginVo {
     private String username;
     private String password;
+    private String identity;
 
-    public User() {
+    public LoginVo() {
     }
 
-    public User(String username, String password) {
+    public LoginVo(String username, String password, String identity) {
         this.username = username;
         this.password = password;
+        this.identity = identity;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 
     public String getUsername() {

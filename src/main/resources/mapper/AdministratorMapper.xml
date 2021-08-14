@@ -26,12 +26,18 @@
   </select>
   <select id="count" resultType="java.lang.Integer">
         select count(*) from administrator;
-    </select>
+  </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from administrator
     where username = #{username,jdbcType=VARCHAR} and category = 1
+  </select>
+  <select id="selectSuperAdminByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from administrator
+    where username = #{username,jdbcType=VARCHAR} and category = 0
   </select>
   <select id="findAll" resultMap="BaseResultMap">
     select
