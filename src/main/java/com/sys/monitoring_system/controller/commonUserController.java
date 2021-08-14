@@ -20,6 +20,12 @@ public class commonUserController {
         return commonUserService.queryOldPeopleInfo(Integer.parseInt(page), Integer.parseInt(pageSize), Integer.parseInt(userId));
     }
 
+    @RequestMapping("queryPhysiologyInfo")
+    public Response queryPhysiologyInfo( @RequestParam("userId") String userId){
+        System.out.println("获取环境信息");
+        return commonUserService.queryPhysiologyInfo(Integer.parseInt(userId));
+    }
+
     @RequestMapping("queryEnviromentInfo")
     public Response queryEnviromentInfo( @RequestParam("userId") String userId){
         System.out.println("获取环境信息");

@@ -2,8 +2,10 @@ package com.sys.monitoring_system.service.Impl;
 
 import com.sys.monitoring_system.entity.environmental;
 import com.sys.monitoring_system.entity.oldPeople;
+import com.sys.monitoring_system.entity.physiological;
 import com.sys.monitoring_system.mapper.enviromentalMapper;
 import com.sys.monitoring_system.mapper.oldPeopleMapper;
+import com.sys.monitoring_system.mapper.physiologicalMapper;
 import com.sys.monitoring_system.service.commonUserService;
 import com.sys.monitoring_system.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class commonUserServiceImpl implements commonUserService {
 
     @Autowired
     enviromentalMapper enviromentalMapper;
+
+    @Autowired
+    physiologicalMapper physiologicalMapper;
 
     @Override
     public Response queryOldPeopleInfo(int offset, int pageSize, int userId){
@@ -42,7 +47,15 @@ public class commonUserServiceImpl implements commonUserService {
         return Response.success(map);
     }
 
-
+    @Override
+    public Response  queryPhysiologyInfo(int userId){
+        List<physiological> physiologicals= physiologicalMapper.queryPhysiologyInfo(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 200);
+        map.put("message", "success");
+        map.put("data", physiologicals);
+        return Response.success(map);
+    }
     @Override
     public Response saveOrUpdate(String oldId, String userId, String name, String sex, String height, String weight, String age, String bmi, String tel){
         if(oldId==null){

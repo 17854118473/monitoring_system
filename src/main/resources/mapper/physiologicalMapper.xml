@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.monitoring_system.mapper.physiologicalMapper">
+  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.physiological">
+    <id column="physiologicalId" jdbcType="INTEGER" property="physiologicalid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="oldId" jdbcType="INTEGER" property="oldid" />
+    <result column="blood_pressure" jdbcType="REAL" property="bloodPressure" />
+    <result column="blood_sugar" jdbcType="REAL" property="bloodSugar" />
+    <result column="gas" jdbcType="REAL" property="gas" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    physiologicalId, userId, oldId, blood_pressure, blood_sugar, gas, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from physiological_data
+    where physiologicalId = #{physiologicalid,jdbcType=INTEGER}
+  </select>
+  <select id="queryPhysiologyInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from physiological_data
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from physiological_data
+    where physiologicalId = #{physiologicalid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sys.monitoring_system.entity.physiological">
+    insert into physiological_data (physiologicalId, userId, oldId, 
+      blood_pressure, blood_sugar, gas, 
+      time)
+    values (#{physiologicalid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{oldid,jdbcType=INTEGER}, 
+      #{bloodPressure,jdbcType=REAL}, #{bloodSugar,jdbcType=REAL}, #{gas,jdbcType=REAL}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.physiological">
+    insert into physiological_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="physiologicalid != null">
+        physiologicalId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="oldid != null">
+        oldId,
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure,
+      </if>
+      <if test="bloodSugar != null">
+        blood_sugar,
+      </if>
+      <if test="gas != null">
+        gas,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="physiologicalid != null">
+        #{physiologicalid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="oldid != null">
+        #{oldid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodPressure != null">
+        #{bloodPressure,jdbcType=REAL},
+      </if>
+      <if test="bloodSugar != null">
+        #{bloodSugar,jdbcType=REAL},
+      </if>
+      <if test="gas != null">
+        #{gas,jdbcType=REAL},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.physiological">
+    update physiological_data
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="oldid != null">
+        oldId = #{oldid,jdbcType=INTEGER},
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure = #{bloodPressure,jdbcType=REAL},
+      </if>
+      <if test="bloodSugar != null">
+        blood_sugar = #{bloodSugar,jdbcType=REAL},
+      </if>
+      <if test="gas != null">
+        gas = #{gas,jdbcType=REAL},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where physiologicalId = #{physiologicalid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.physiological">
+    update physiological_data
+    set userId = #{userid,jdbcType=INTEGER},
+      oldId = #{oldid,jdbcType=INTEGER},
+      blood_pressure = #{bloodPressure,jdbcType=REAL},
+      blood_sugar = #{bloodSugar,jdbcType=REAL},
+      gas = #{gas,jdbcType=REAL},
+      time = #{time,jdbcType=TIMESTAMP}
+    where physiologicalId = #{physiologicalid,jdbcType=INTEGER}
+  </update>
+</mapper>
