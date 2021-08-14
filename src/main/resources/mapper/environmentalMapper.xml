@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.monitoring_system.mapper.enviromentalMapper">
+  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.environmental">
+    <id column="environmentalId" jdbcType="INTEGER" property="environmentalid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="temperature" jdbcType="REAL" property="temperature" />
+    <result column="humIdity" jdbcType="REAL" property="humidity" />
+    <result column="gas" jdbcType="REAL" property="gas" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    environmentalId, userId, temperature, humIdity, gas, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from environmental_data
+    where environmentalId = #{environmentalid,jdbcType=INTEGER}
+  </select>
+  <select id="queryEnviromentInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from environmental_data
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from environmental_data
+    where environmentalId = #{environmentalid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sys.monitoring_system.entity.environmental">
+    insert into environmental_data (environmentalId, userId, temperature, 
+      humIdity, gas, time)
+    values (#{environmentalid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{temperature,jdbcType=REAL}, 
+      #{humidity,jdbcType=REAL}, #{gas,jdbcType=REAL}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.environmental">
+    insert into environmental_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="environmentalid != null">
+        environmentalId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="humidity != null">
+        humIdity,
+      </if>
+      <if test="gas != null">
+        gas,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="environmentalid != null">
+        #{environmentalid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=REAL},
+      </if>
+      <if test="humidity != null">
+        #{humidity,jdbcType=REAL},
+      </if>
+      <if test="gas != null">
+        #{gas,jdbcType=REAL},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.environmental">
+    update environmental_data
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=REAL},
+      </if>
+      <if test="humidity != null">
+        humIdity = #{humidity,jdbcType=REAL},
+      </if>
+      <if test="gas != null">
+        gas = #{gas,jdbcType=REAL},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where environmentalId = #{environmentalid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.environmental">
+    update environmental_data
+    set userId = #{userid,jdbcType=INTEGER},
+      temperature = #{temperature,jdbcType=REAL},
+      humIdity = #{humidity,jdbcType=REAL},
+      gas = #{gas,jdbcType=REAL},
+      time = #{time,jdbcType=TIMESTAMP}
+    where environmentalId = #{environmentalid,jdbcType=INTEGER}
+  </update>
+</mapper>

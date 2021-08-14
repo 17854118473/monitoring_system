@@ -1,6 +1,8 @@
 package com.sys.monitoring_system.service.Impl;
 
+import com.sys.monitoring_system.entity.environmental;
 import com.sys.monitoring_system.entity.oldPeople;
+import com.sys.monitoring_system.mapper.enviromentalMapper;
 import com.sys.monitoring_system.mapper.oldPeopleMapper;
 import com.sys.monitoring_system.service.commonUserService;
 import com.sys.monitoring_system.utils.Response;
@@ -16,6 +18,9 @@ public class commonUserServiceImpl implements commonUserService {
     @Autowired
     oldPeopleMapper oldPeopleMapper;
 
+    @Autowired
+    enviromentalMapper enviromentalMapper;
+
     @Override
     public Response queryOldPeopleInfo(int offset, int pageSize, int userId){
         List<oldPeople> oldPeoples = oldPeopleMapper.queryByPage(offset,pageSize,userId);
@@ -26,6 +31,17 @@ public class commonUserServiceImpl implements commonUserService {
         map.put("data", oldPeoples);
         return Response.success(map);
     }
+
+    @Override
+    public Response queryEnviromentInfo(int userId){
+        List<environmental> enviromentals = enviromentalMapper.queryEnviromentInfo(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 200);
+        map.put("message", "success");
+        map.put("data", enviromentals);
+        return Response.success(map);
+    }
+
 
     @Override
     public Response saveOrUpdate(String oldId, String userId, String name, String sex, String height, String weight, String age, String bmi, String tel){

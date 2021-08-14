@@ -10,4 +10,6 @@ public interface commonUserService {
     public Response saveOrUpdate(String oldId, String userId, String name, String sex, String height, String weight, String age, String bmi, String tel);
 
     public Response deleteOldPeopleById(String id);
+
+    public Response queryEnviromentInfo(int userId);
 }
