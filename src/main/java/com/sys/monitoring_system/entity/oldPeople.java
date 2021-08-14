@@ -1,6 +1,6 @@
 package com.sys.monitoring_system.entity;
 
-public class old_data {
+public class oldPeople {
     private Integer oldid;
 
     private Integer userid;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sys.monitoring_system.mapper.old_dataMapper">
-  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.old_data">
+<mapper namespace="com.sys.monitoring_system.mapper.oldPeopleMapper">
+  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.oldPeople">
     <id column="oldId" jdbcType="INTEGER" property="oldid" />
     <result column="userId" jdbcType="INTEGER" property="userid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -23,11 +23,20 @@
     from old_data
     where oldId = #{oldid,jdbcType=INTEGER}
   </select>
+  <select id="count" resultType="java.lang.Integer">
+        select count(*) from old_data where userId = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="queryByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from old_data
+    where userId = #{userId,jdbcType=INTEGER} limit #{offset}, #{pageSize}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from old_data
     where oldId = #{oldid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.sys.monitoring_system.entity.old_data">
+  <insert id="insert" parameterType="com.sys.monitoring_system.entity.oldPeople">
     insert into old_data (oldId, userId, name, 
       sex, height, weight, age, 
       BMI, tel, urgenttel, address
@@ -37,7 +46,7 @@
       #{bmi,jdbcType=REAL}, #{tel,jdbcType=VARCHAR}, #{urgenttel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.old_data">
+  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.oldPeople">
     insert into old_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="oldid != null">
@@ -110,7 +119,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.old_data">
+  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.oldPeople">
     update old_data
     <set>
       <if test="userid != null">
@@ -146,7 +155,7 @@
     </set>
     where oldId = #{oldid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.old_data">
+  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.oldPeople">
     update old_data
     set userId = #{userid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
