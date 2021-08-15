@@ -1,9 +1,11 @@
 package com.sys.monitoring_system.service.Impl;
 
 import com.sys.monitoring_system.entity.environmental;
+import com.sys.monitoring_system.entity.equipment;
 import com.sys.monitoring_system.entity.oldPeople;
 import com.sys.monitoring_system.entity.physiological;
 import com.sys.monitoring_system.mapper.enviromentalMapper;
+import com.sys.monitoring_system.mapper.equipmentMapper;
 import com.sys.monitoring_system.mapper.oldPeopleMapper;
 import com.sys.monitoring_system.mapper.physiologicalMapper;
 import com.sys.monitoring_system.service.commonUserService;
@@ -25,6 +27,9 @@ public class commonUserServiceImpl implements commonUserService {
 
     @Autowired
     physiologicalMapper physiologicalMapper;
+
+    @Autowired
+    equipmentMapper equipmentMapper;
 
     @Override
     public Response queryOldPeopleInfo(int offset, int pageSize, int userId){
@@ -56,6 +61,17 @@ public class commonUserServiceImpl implements commonUserService {
         map.put("data", physiologicals);
         return Response.success(map);
     }
+
+    @Override
+    public Response queryEquipmentInfo(int userId){
+        List<equipment> equipment= equipmentMapper.queryEquipment(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 200);
+        map.put("message", "success");
+        map.put("data", equipment);
+        return Response.success(map);
+    }
+
     @Override
     public Response saveOrUpdate(String oldId, String userId, String name, String sex, String height, String weight, String age, String bmi, String tel){
         if(oldId==null){

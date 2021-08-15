@@ -14,4 +14,6 @@ public interface commonUserService {
     public Response queryEnviromentInfo(int userId);
 
     public Response  queryPhysiologyInfo(int userId);
+
+    public Response  queryEquipmentInfo(int userId);
 }

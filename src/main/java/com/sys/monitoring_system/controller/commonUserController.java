@@ -32,6 +32,12 @@ public class commonUserController {
         return commonUserService.queryEnviromentInfo(Integer.parseInt(userId));
     }
 
+    @RequestMapping("queryEquipmentInfo")
+    public Response  queryEquipmentInfo( @RequestParam("userId") String userId){
+        System.out.println("获取环境信息");
+        return commonUserService.queryEquipmentInfo(Integer.parseInt(userId));
+    }
+
     @RequestMapping("saveOrUpdate")
     public Response saveOrUpdate(@RequestParam("oldid") String oldId, @RequestParam("userid") String userId,@RequestParam("name") String name,@RequestParam("sex") String sex,@RequestParam("height") String height,@RequestParam("weight") String weight,@RequestParam("age") String age,@RequestParam("bmi") String bmi,@RequestParam("tel") String tel){
         return commonUserService.saveOrUpdate(oldId, userId, name, sex, height, weight, age, bmi, tel);

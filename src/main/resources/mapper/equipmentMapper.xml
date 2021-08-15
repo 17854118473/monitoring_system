@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.monitoring_system.mapper.equipmentMapper">
+  <resultMap id="BaseResultMap" type="com.sys.monitoring_system.entity.equipment">
+    <id column="equipmentId" jdbcType="INTEGER" property="equipmentid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="equipment1" jdbcType="VARCHAR" property="equipment1" />
+    <result column="equipment2" jdbcType="VARCHAR" property="equipment2" />
+    <result column="equipment3" jdbcType="VARCHAR" property="equipment3" />
+    <result column="equipment4" jdbcType="VARCHAR" property="equipment4" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    equipmentId, userId, equipment1, equipment2, equipment3, equipment4, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from equipment_data
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </select>
+  <select id="queryEquipment" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from equipment_data
+    where userId = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from equipment_data
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sys.monitoring_system.entity.equipment">
+    insert into equipment_data (equipmentId, userId, equipment1, 
+      equipment2, equipment3, equipment4, 
+      time)
+    values (#{equipmentid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{equipment1,jdbcType=VARCHAR}, 
+      #{equipment2,jdbcType=VARCHAR}, #{equipment3,jdbcType=VARCHAR}, #{equipment4,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sys.monitoring_system.entity.equipment">
+    insert into equipment_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmentid != null">
+        equipmentId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="equipment1 != null">
+        equipment1,
+      </if>
+      <if test="equipment2 != null">
+        equipment2,
+      </if>
+      <if test="equipment3 != null">
+        equipment3,
+      </if>
+      <if test="equipment4 != null">
+        equipment4,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmentid != null">
+        #{equipmentid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="equipment1 != null">
+        #{equipment1,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment2 != null">
+        #{equipment2,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment3 != null">
+        #{equipment3,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment4 != null">
+        #{equipment4,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sys.monitoring_system.entity.equipment">
+    update equipment_data
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="equipment1 != null">
+        equipment1 = #{equipment1,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment2 != null">
+        equipment2 = #{equipment2,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment3 != null">
+        equipment3 = #{equipment3,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment4 != null">
+        equipment4 = #{equipment4,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sys.monitoring_system.entity.equipment">
+    update equipment_data
+    set userId = #{userid,jdbcType=INTEGER},
+      equipment1 = #{equipment1,jdbcType=VARCHAR},
+      equipment2 = #{equipment2,jdbcType=VARCHAR},
+      equipment3 = #{equipment3,jdbcType=VARCHAR},
+      equipment4 = #{equipment4,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where equipmentId = #{equipmentid,jdbcType=INTEGER}
+  </update>
+</mapper>
