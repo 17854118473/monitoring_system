@@ -31,7 +31,7 @@
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="old_data" domainObjectName="old_data" enableCountByExample="false"  enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+        <table tableName="equipment_data" domainObjectName="equipment" enableCountByExample="false"  enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 
         </table>
 
